@@ -14,7 +14,9 @@ import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/feeds.dart';
 import 'package:ecommerce_app/screens/home.dart';
 import 'package:ecommerce_app/screens/search.dart';
+import 'package:ecommerce_app/screens/user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/constant/my_icons.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class BottomBar extends StatefulWidget {
@@ -38,6 +40,7 @@ class _BottomBarState extends State<BottomBar> {
     Feed(),
     Cart(),
     Search(),
+    UserInfo()
   ];
   // ignore: unused_element
   void _onItemTapped(int index) {
@@ -55,116 +58,100 @@ class _BottomBarState extends State<BottomBar> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      floatingActionButton: Container(
-        child: FloatingActionButton(
-          //Floating action button on Scaffold
-          onPressed: () => _onItemTapped(3),
-          child: Icon(Icons.send), //icon inside button
-        ),
+      floatingActionButton: FloatingActionButton(
+        //Floating action button on Scaffold
+        onPressed: () => _onItemTapped(3),
+        child: Icon(MyAppIcons.search), //icon inside button
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //floating action button position to center
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: _selectedIndex,
-      //   type: BottomNavigationBarType.fixed,
-      //   backgroundColor: Colors.red,
-      //   selectedItemColor: Colors.white,
-      //   unselectedItemColor: Colors.white.withOpacity(.60),
-      //   selectedFontSize: 14,
-      //   unselectedFontSize: 14,
-      //   onTap: (value) {
-      //     print(value);
-      //     setState(() {
-      //       _selectedIndex = value;
-      //     });
-      //   },
-      //   items: <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       label: 'Favorites',
-      //       icon: Icon(Icons.favorite),
-      //     ),
-      //     BottomNavigationBarItem(
-      //       label: 'Music',
-      //       icon: Icon(Icons.music_note),
-      //     ),
-      //     BottomNavigationBarItem(
-      //       label: 'Places',
-      //       icon: Icon(Icons.location_on),
-      //     ),
-      //     BottomNavigationBarItem(
-      //       label: 'News',
-      //       icon: Icon(Icons.library_books),
-      //     ),
-      //   ],
-      // ),
-
       bottomNavigationBar: BottomAppBar(
-        //bottom navigation bar on scaffold
-
-        color: Colors.redAccent,
-        shape: CircularNotchedRectangle(), //shape of notch
-        notchMargin:
-            10, //notche margin between floating button and bottom appbar
-
-        child: Container(
-          height: 60,
-          child: Row(
-            //children inside bottom appbar
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: rowWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                      ),
-                      iconSize: iconSize,
-                      onPressed: () => _onItemTapped(0),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                      iconSize: iconSize,
-                      onPressed: () => _onItemTapped(1),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: rowWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.print,
-                        color: Colors.white,
-                      ),
-                      iconSize: iconSize,
-                      onPressed: () => _onItemTapped(2),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      iconSize: iconSize,
-                      onPressed: () => _onItemTapped(3),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 5,
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          onTap: _onItemTapped,
+          backgroundColor: Colors.red,
+          unselectedItemColor: Colors.amber,
+          selectedItemColor: Colors.black45,
+          // showUnselectedLabels: true,
+          currentIndex: _selectedIndex,
+          items: [
+            BottomNavigationBarItem(
+                label: 'Home',
+                icon: Icon(MyAppIcons.home),
+                activeIcon: Icon(MyAppIcons.home_active)),
+            BottomNavigationBarItem(
+              label: 'Feed',
+              icon: Icon(MyAppIcons.rss_feed),
+            ),
+            BottomNavigationBarItem(
+              label: 'Cart',
+              icon: Icon(MyAppIcons.shoping_bag),
+            ),
+            BottomNavigationBarItem(
+                label: 'User',
+                icon: Icon(MyAppIcons.user),
+                activeIcon: Icon(MyAppIcons.user_active)),
+          ],
         ),
+        // child: Container(
+        //   height: 60,
+        //   child: Row(
+        //     //children inside bottom appbar
+        //     mainAxisSize: MainAxisSize.max,
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: <Widget>[
+        //       Container(
+        //         width: rowWidth,
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //           children: [
+        //             IconButton(
+        //               icon: Icon(
+        //                 Icons.home,
+        //                 color: Colors.white,
+        //               ),
+        //               iconSize: iconSize,
+        //               onPressed: () => _onItemTapped(0),
+        //             ),
+        //             IconButton(
+        //               icon: Icon(
+        //                 Icons.search,
+        //                 color: Colors.white,
+        //               ),
+        //               iconSize: iconSize,
+        //               onPressed: () => _onItemTapped(1),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //       Container(
+        //         width: rowWidth,
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //           children: [
+        //             IconButton(
+        //               icon: Icon(
+        //                 Icons.print,
+        //                 color: Colors.white,
+        //               ),
+        //               iconSize: iconSize,
+        //               onPressed: () => _onItemTapped(2),
+        //             ),
+        //             IconButton(
+        //               icon: Icon(
+        //                 Icons.people,
+        //                 color: Colors.white,
+        //               ),
+        //               iconSize: iconSize,
+        //               onPressed: () => _onItemTapped(3),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }
