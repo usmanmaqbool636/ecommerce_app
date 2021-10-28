@@ -10,6 +10,8 @@
 // selected item's index and displays a corresponding message in the center of
 // the [Scaffold].
 
+// ignore_for_file: avoid_print
+
 import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/feeds.dart';
 import 'package:ecommerce_app/screens/home.dart';
@@ -29,7 +31,7 @@ class BottomBar extends StatefulWidget {
 /// This is the private State class that goes with BottomBar.
 class _BottomBarState extends State<BottomBar> {
   // ignore: unused_field
-  int _selectedIndex = 0;
+  int _selectedIndex = 3;
   double iconSize = 27;
   // ignore: unused_field
   static const TextStyle optionStyle =
@@ -39,11 +41,12 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     Feed(),
     Cart(),
-    Search(),
-    UserInfo()
+    UserInfo(),
+    Search()
   ];
   // ignore: unused_element
   void _onItemTapped(int index) {
+    print(index);
     setState(() {
       _selectedIndex = index;
     });
@@ -60,7 +63,7 @@ class _BottomBarState extends State<BottomBar> {
       ),
       floatingActionButton: FloatingActionButton(
         //Floating action button on Scaffold
-        onPressed: () => _onItemTapped(3),
+        onPressed: () => _onItemTapped(4),
         child: Icon(MyAppIcons.search), //icon inside button
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -72,26 +75,26 @@ class _BottomBarState extends State<BottomBar> {
           onTap: _onItemTapped,
           backgroundColor: Colors.red,
           unselectedItemColor: Colors.amber,
-          selectedItemColor: Colors.black45,
+          selectedItemColor: _selectedIndex > 3 ? Colors.amber : Colors.black45,
           // showUnselectedLabels: true,
-          currentIndex: _selectedIndex,
+          currentIndex: _selectedIndex > 3 ? 0 : _selectedIndex,
           items: [
             BottomNavigationBarItem(
                 label: 'Home',
                 icon: Icon(MyAppIcons.home),
-                activeIcon: Icon(MyAppIcons.home_active)),
+                activeIcon: Icon(MyAppIcons.homeActive)),
             BottomNavigationBarItem(
               label: 'Feed',
-              icon: Icon(MyAppIcons.rss_feed),
+              icon: Icon(MyAppIcons.rssFeed),
             ),
             BottomNavigationBarItem(
               label: 'Cart',
-              icon: Icon(MyAppIcons.shoping_bag),
+              icon: Icon(MyAppIcons.shopingBag),
             ),
             BottomNavigationBarItem(
                 label: 'User',
                 icon: Icon(MyAppIcons.user),
-                activeIcon: Icon(MyAppIcons.user_active)),
+                activeIcon: Icon(MyAppIcons.userActive)),
           ],
         ),
         // child: Container(
