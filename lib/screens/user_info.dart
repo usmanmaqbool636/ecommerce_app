@@ -1,8 +1,15 @@
+// ignore_for_file: avoid_print, unused_label
+
 import 'package:flutter/material.dart';
 
-class UserInfo extends StatelessWidget {
+class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
+  @override
+  State<UserInfo> createState() => _UserInfoState();
+}
 
+class _UserInfoState extends State<UserInfo> {
+  bool themeValue = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +19,7 @@ class UserInfo extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: userTitle(title: "User"),
+            child: userTitle(title: "User Information"),
           ),
           const Divider(thickness: 1, color: Colors.grey),
           userListTile(
@@ -37,8 +44,30 @@ class UserInfo extends StatelessWidget {
             context: context,
             title: "Joined Date",
             subTitle: "date",
-            icon: Icons.email,
-          )
+            icon: Icons.timer_rounded,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: userTitle(title: "User Setting"),
+          ),
+          const Divider(thickness: 1, color: Colors.grey),
+          userWitchListTile(
+            context: context,
+            title: "Dark Theme",
+            icon: Icons.mode_night_outlined,
+            value: themeValue,
+            changeHandler: (value) {
+              setState(() {
+                themeValue = value;
+              });
+            },
+          ),
+          userListTile(
+            context: context,
+            title: "Logout",
+            subTitle: "",
+            icon: Icons.logout,
+          ),
         ],
       ),
     );
@@ -66,6 +95,32 @@ class UserInfo extends StatelessWidget {
           title: Text(title),
           subtitle: Text(subTitle),
           leading: Icon(icon),
+        ),
+      ),
+    );
+  }
+
+  Material userWitchListTile({
+    required BuildContext context,
+    String title = "N/A",
+    String subTitle = "",
+    IconData icon = Icons.wash_rounded,
+    bool value = false,
+    required Function changeHandler,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        splashColor: Colors.amber,
+        child: SwitchListTile(
+          value: value,
+          onChanged: (value) {
+            print("value $value");
+            changeHandler(value);
+          },
+          title: Text(title),
+          subtitle: Text(subTitle),
+          secondary: Icon(icon),
         ),
       ),
     );
