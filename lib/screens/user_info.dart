@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_label
+// ignore_for_file: avoid_print, unused_label, prefer_const_declarations
 
 import 'package:ecommerce_app/constant/colors.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +14,32 @@ class _UserInfoState extends State<UserInfo> {
   ScrollController? _scrollController;
   var top = 0.0;
   @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController!.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // floatingActionButton: buildFab(),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            top: 100.0,
+            right: 0,
+            child: FloatingActionButton(
+              child: const Icon(Icons.camera_alt_outlined),
+              onPressed: () {
+                print("Usman Floating Action Button");
+              },
+            ),
+          )
+        ],
+      ),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
@@ -27,7 +51,6 @@ class _UserInfoState extends State<UserInfo> {
             flexibleSpace: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 top = constraints.biggest.height;
-                print(top);
                 return Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -191,72 +214,47 @@ class _UserInfoState extends State<UserInfo> {
           ),
         ],
       ),
-      //   body: Column(
-      // crossAxisAlignment: CrossAxisAlignment.start,
-      // mainAxisAlignment: MainAxisAlignment.center,
-      // children: const [],
-      //   children: [
-      //     Padding(
-      //       padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-      //       child: userTitle(title: "User Information"),
-      //     ),
-      //     const Divider(thickness: 1, color: Colors.grey),
-      //     userListTile(
-      //       context: context,
-      //       title: "Email",
-      //       subTitle: "Sub Email",
-      //       icon: Icons.email,
-      //     ),
-      //     userListTile(
-      //       context: context,
-      //       title: "Phone",
-      //       subTitle: "Sub Phone",
-      //       icon: Icons.phone,
-      //     ),
-      //     userListTile(
-      //       context: context,
-      //       title: "Shipping Address",
-      //       subTitle: "",
-      //       icon: Icons.local_shipping,
-      //     ),
-      //     userListTile(
-      //       context: context,
-      //       title: "Joined Date",
-      //       subTitle: "date",
-      //       icon: Icons.timer_rounded,
-      //     ),
-      //     Padding(
-      //       padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-      //       child: userTitle(title: "User Setting"),
-      //     ),
-      //     const Divider(thickness: 1, color: Colors.grey),
-      //     userWitchListTile(
-      //       context: context,
-      //       title: "Dark Theme",
-      //       icon: Icons.mode_night_outlined,
-      //       value: themeValue,
-      //       changeHandler: (value) {
-      //         setState(() {
-      //           themeValue = value;
-      //         });
-      //       },
-      //     ),
-      //     userListTile(
-      //       context: context,
-      //       title: "Logout",
-      //       subTitle: "",
-      //       icon: Icons.logout,
-      //     ),
-      //   ],
-      // ),
-      // )
     );
   }
 
-  Text userTitle({String title = "N/A"}) {
-    return Text(
-      title,
-      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+  // Widget buildFab() {
+  //   final double defaultTopMargin = 200.0 - 4.0;
+  //   final double scaleStart = 160.0;
+  //   final double scaleEnd = scaleStart / 2;
+  //   double top = defaultTopMargin;
+  //   double scale = 1.0;
+  //   if (_scrollController!.hasClients) {
+  //     double offset = _scrollController!.offset;
+  //     top -= offset;
+  //     if (offset < defaultTopMargin - scaleStart) {
+  //       scale = 1.0;
+  //     } else if (offset < defaultTopMargin - scaleEnd) {
+  //       scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
+  //     } else {
+  //       scale = 1.0;
+  //     }
+  //   }
+  //   return Positioned(
+  //     top: top,
+  //     right: 16.0,
+  //     child: Transform(
+  //       transform: Matrix4.identity()..scale(scale),
+  //       child: FloatingActionButton(
+  //         heroTag: "btn1",
+  //         onPressed: () {},
+  //         child: const Icon(Icons.camera_alt_outlined),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget userTitle({String title = "N/A"}) {
+    return Padding(
+      padding: const EdgeInsets.all(14.0),
+      child: Text(
+        title,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+      ),
     );
   }
 
