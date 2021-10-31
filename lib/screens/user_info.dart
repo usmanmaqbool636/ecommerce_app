@@ -25,21 +25,6 @@ class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: buildFab(),
-      floatingActionButton: Stack(
-        children: [
-          Positioned(
-            top: 100.0,
-            right: 0,
-            child: FloatingActionButton(
-              child: const Icon(Icons.camera_alt_outlined),
-              onPressed: () {
-                print("Usman Floating Action Button");
-              },
-            ),
-          )
-        ],
-      ),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
@@ -50,7 +35,7 @@ class _UserInfoState extends State<UserInfo> {
             pinned: true,
             flexibleSpace: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-                top = constraints.biggest.height;
+                top = constraints.biggest.height - 20;
                 return Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -64,54 +49,78 @@ class _UserInfoState extends State<UserInfo> {
                       tileMode: TileMode.clamp,
                     ),
                   ),
-                  child: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.parallax,
-                    centerTitle: true,
-                    title: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        AnimatedOpacity(
-                          duration: const Duration(milliseconds: 300),
-                          opacity: top < 100.0 ? 1.0 : 0,
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Container(
-                                height: kToolbarHeight / 1.8,
-                                width: kToolbarHeight / 1.8,
-                                decoration: const BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.white, blurRadius: 1.0)
-                                  ],
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        "https://image.shutterstock.com/shutterstock/photos/1153673752/display_1500/stock-vector-profile-placeholder-image-gray-silhouette-no-photo-1153673752.jpg"),
+                  child: Stack(
+                    children: [
+                      FlexibleSpaceBar(
+                        collapseMode: CollapseMode.parallax,
+                        centerTitle: true,
+                        title: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: top < 100.0 ? 1.0 : 0,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 20,
                                   ),
-                                ),
+                                  Container(
+                                    height: kToolbarHeight / 1.8,
+                                    width: kToolbarHeight / 1.8,
+                                    decoration: const BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.white,
+                                            blurRadius: 1.0)
+                                      ],
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            "https://image.shutterstock.com/shutterstock/photos/1153673752/display_1500/stock-vector-profile-placeholder-image-gray-silhouette-no-photo-1153673752.jpg"),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 12,
+                                  ),
+                                  const Text(
+                                    "Guest",
+                                    style: TextStyle(
+                                        fontSize: 20.0, color: Colors.white),
+                                  )
+                                ],
                               ),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              const Text(
-                                "Guest",
-                                style: TextStyle(
-                                    fontSize: 20.0, color: Colors.white),
-                              )
-                            ],
+                            ),
+                          ],
+                        ),
+                        background: const Image(
+                          image: NetworkImage(
+                              "https://image.shutterstock.com/shutterstock/photos/1153673752/display_1500/stock-vector-profile-placeholder-image-gray-silhouette-no-photo-1153673752.jpg"),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Positioned(
+                        width: top * .30,
+                        height: top * .30,
+                        top: top * .65,
+                        right: 20,
+                        child: AnimatedOpacity(
+                          duration: const Duration(milliseconds: 300),
+                          opacity: top > 100.0 ? 1.0 : 0,
+                          child: FloatingActionButton(
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              size: top * .18,
+                            ),
+                            onPressed: () {
+                              print("Usman Floating Action Button");
+                            },
                           ),
                         ),
-                      ],
-                    ),
-                    background: const Image(
-                      image: NetworkImage(
-                          "https://image.shutterstock.com/shutterstock/photos/1153673752/display_1500/stock-vector-profile-placeholder-image-gray-silhouette-no-photo-1153673752.jpg"),
-                      fit: BoxFit.fill,
-                    ),
+                      ),
+                    ],
                   ),
                 );
               },
