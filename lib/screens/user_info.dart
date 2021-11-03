@@ -1,7 +1,9 @@
 // ignore_for_file: avoid_print, unused_label, prefer_const_declarations
 
 import 'package:ecommerce_app/constant/colors.dart';
+import 'package:ecommerce_app/provider/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class _UserInfoState extends State<UserInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       body: CustomScrollView(
         controller: _scrollController,
@@ -204,11 +207,14 @@ class _UserInfoState extends State<UserInfo> {
                 userWitchListTile(
                   context: context,
                   title: "Dark Theme",
-                  icon: Icons.mode_night_outlined,
-                  value: themeValue,
+                  icon: !themeChange.darkTheme
+                      ? Icons.mode_night_outlined
+                      : Icons.wb_sunny,
+                  value: themeChange.darkTheme,
+                  // value: themeValue,
                   changeHandler: (value) {
                     setState(() {
-                      themeValue = value;
+                      themeChange.darkTheme = value;
                     });
                   },
                 ),
