@@ -10,7 +10,7 @@
 // selected item's index and displays a corresponding message in the center of
 // the [Scaffold].
 
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_const_constructors
 
 import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/feeds.dart';
@@ -31,13 +31,13 @@ class BottomBar extends StatefulWidget {
 /// This is the private State class that goes with BottomBar.
 class _BottomBarState extends State<BottomBar> {
   // ignore: unused_field
-  int _selectedIndex = 3;
+  int _selectedIndex = 1;
   double iconSize = 27;
   // ignore: unused_field
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   // ignore: unused_field
-  static const List<Widget> _widgetOptions = [
+  static final List<Widget> _widgetOptions = [
     HomeScreen(),
     Feed(),
     Cart(),

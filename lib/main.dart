@@ -17,18 +17,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) {
-            return themeChangeProvider;
-          })
-        ],
-        child:
-            Consumer<DarkThemeProvider>(builder: (context, themeDate, child) {
+      providers: [
+        ChangeNotifierProvider(create: (_) {
+          return themeChangeProvider;
+        })
+      ],
+      child: Consumer<DarkThemeProvider>(
+        builder: (context, themeDate, child) {
           return MaterialApp(
             title: 'Ecomerce App',
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
             home: const SafeArea(child: BottomBar()),
           );
-        }));
+        },
+      ),
+    );
   }
 }
