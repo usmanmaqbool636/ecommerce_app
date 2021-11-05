@@ -31,7 +31,7 @@ class BottomBar extends StatefulWidget {
 /// This is the private State class that goes with BottomBar.
 class _BottomBarState extends State<BottomBar> {
   // ignore: unused_field
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
   double iconSize = 27;
   // ignore: unused_field
   static const TextStyle optionStyle =

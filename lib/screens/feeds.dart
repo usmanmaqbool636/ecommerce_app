@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,24 +49,43 @@ class Feed extends StatelessWidget {
     return Scaffold(
       body: ChangeNotifierProvider(
         create: (_) => CounterProvider(),
-        child: MyHomePage(title: "Home"),
+        child: const MyHomePage(title: "Home"),
       ),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  String title;
-  MyHomePage({
+class MyHomePage extends StatefulWidget {
+  final String title;
+  const MyHomePage({
     Key? key,
     required this.title,
   }) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  CounterProvider counterProvider = CounterProvider();
+  Future<void> getCurrentCounter() async {
+    counterProvider.count = await counterProvider.counterPrefrence.getCounter();
+    print("counterProvider.count ${counterProvider.count}");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print("${counterProvider.count} count");
+    getCurrentCounter();
+    counterProvider.getValue();
+  }
+
   @override
   Widget build(BuildContext context) {
-    print("Building Home");
     return Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text(widget.title),
         ),
         body: Center(
           child: Column(
@@ -75,27 +93,66 @@ class MyHomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text("Incremented Value"),
-              Consumer<CounterProvider>(
-                builder: (_, value, __) {
-                  return CounterNumber(number: value.count);
-                },
+              ChangeNotifierProvider(
+                create: (_) => counterProvider,
+                child: Consumer<CounterProvider>(
+                  builder: (_, cp, __) {
+                    print("cp=> ${cp.count}");
+                    return CounterNumber(number: cp.count);
+                  },
+                ),
               ),
               // child: CounterNumber(number: count)),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () {
-              print("Floating Button Pressed");
-              Provider.of<CounterProvider>(context, listen: false).increment();
-            }));
+        floatingActionButton: Container(
+          margin: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                backgroundColor: Colors.green,
+                child: const Icon(Icons.plus_one),
+                onPressed: () {
+                  print("Floating Button Pressed");
+                  counterProvider.increment();
+                  // Provider.of<CounterProvider>(context, listen: false).increment();
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                backgroundColor: Colors.amber,
+                child: const Icon(Icons.exposure_minus_1),
+                onPressed: () {
+                  print("Floating Button Pressed");
+                  counterProvider.decrement();
+                  // Provider.of<CounterProvider>(context, listen: false).increment();
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                backgroundColor: Colors.redAccent,
+                child: const Icon(Icons.cancel),
+                onPressed: () {
+                  print("Floating Button Pressed");
+                  counterProvider.resetValue();
+                  // Provider.of<CounterProvider>(context, listen: false).increment();
+                },
+              ),
+            ],
+          ),
+        ));
   }
 }
 
 class CounterNumber extends StatelessWidget {
-  int number;
-  CounterNumber({
+  final int number;
+  const CounterNumber({
     Key? key,
     required this.number,
   }) : super(key: key);
