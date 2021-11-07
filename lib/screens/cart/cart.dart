@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, deprecated_member_use
+// ignore_for_file: avoid_print, deprecated_member_use, avoid_function_literals_in_foreach_calls
 
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ import 'package:ecommerce_app/screens/cart/cart_full.dart';
 class Cart extends StatefulWidget {
   // List<String>? products = [];
 
-  Cart({
+  const Cart({
     Key? key,
   }) : super(key: key);
 
@@ -28,7 +28,6 @@ class _CartState extends State<Cart> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     products.forEach((e) => sum += e.price * e.count);
   }
@@ -141,7 +140,7 @@ class _CartState extends State<Cart> {
             ),
             Text(
               "US \$$sum",
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.blue,
                 fontSize: 18.0,
                 fontWeight: FontWeight.w500,

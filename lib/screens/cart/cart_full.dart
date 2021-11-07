@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace, avoid_print
+// ignore_for_file: sized_box_for_whitespace, avoid_print, must_be_immutable, deprecated_member_use, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -90,8 +90,10 @@ class _CartFullState extends State<CartFull> {
                           widget.title,
                           maxLines: 2,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 15),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                       Material(
@@ -116,14 +118,16 @@ class _CartFullState extends State<CartFull> {
                   ),
                   Row(
                     children: [
-                      Text("price"),
-                      SizedBox(
+                      const Text("price"),
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
                         "\$${widget.price}",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -156,14 +160,14 @@ class _CartFullState extends State<CartFull> {
                               : Theme.of(context).accentColor,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Material(
                         color: Colors.transparent,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(4),
                           child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 "-",
                                 style: TextStyle(
@@ -180,20 +184,22 @@ class _CartFullState extends State<CartFull> {
                         elevation: 12,
                         child: Container(
                           width: MediaQuery.of(context).size.width * .12,
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
                                 ColorsConstant.gradiendlStart,
                                 ColorsConstant.gradiendlEnd
                               ],
-                              stops: [0.0, 0.7],
+                              stops: const [0.0, 0.7],
                             ),
                           ),
                           child: Text(
                             "${widget.count}",
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
