@@ -8,4 +8,5 @@ class MyAppIcons {
   static IconData user = Icons.person_outline;
   static IconData userActive = Icons.person;
   static IconData search = Icons.search;
+  static IconData trash = Icons.delete;
 }
