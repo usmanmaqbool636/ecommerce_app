@@ -12,10 +12,12 @@ class CartFull extends StatefulWidget {
   double price;
   int count;
   Function updateCount;
+  String imgUrl;
   CartFull({
     Key? key,
     this.index,
     required this.updateCount,
+    required this.imgUrl,
     required this.title,
     required this.price,
     required this.count,
@@ -76,9 +78,8 @@ class _CartFullState extends State<CartFull> {
                     ),
                   )
                 ],
-                image: const DecorationImage(
-                  image:
-                      NetworkImage("https://source.unsplash.com/user/erondu"),
+                image: DecorationImage(
+                  image: NetworkImage(widget.imgUrl),
                   fit: BoxFit.fill,
                 ),
                 borderRadius: BorderRadius.circular(10)),
@@ -177,9 +178,7 @@ class _CartFullState extends State<CartFull> {
                               child: Text(
                                 "-",
                                 style: TextStyle(
-                                  fontSize: 50,
-                                  color: Colors.redAccent,
-                                ),
+                                    fontSize: 50, color: Colors.redAccent),
                               ),
                             ),
                           ),
@@ -218,7 +217,7 @@ class _CartFullState extends State<CartFull> {
                             child: Text(
                               "+",
                               style: TextStyle(
-                                  fontSize: 50, color: Colors.green.shade600),
+                                  fontSize: 50, color: Colors.lightGreenAccent),
                             ),
                           ),
                           onTap: add,

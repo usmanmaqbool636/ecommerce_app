@@ -20,10 +20,30 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   List products = <CartItems>[
-    CartItems(title: "Shoes", price: 100, count: 1),
-    CartItems(title: "Shoes", price: 100, count: 1),
-    CartItems(title: "Shoes", price: 29, count: 3),
-    CartItems(title: "Shoes", price: 100, count: 1),
+    CartItems(
+      title: "Shoes",
+      price: 100,
+      count: 1,
+      imgUrl: "https://source.unsplash.com/random",
+    ),
+    CartItems(
+      title: "Shoes",
+      price: 100,
+      count: 1,
+      imgUrl: "https://source.unsplash.com/random",
+    ),
+    CartItems(
+      title: "Shoes",
+      price: 29,
+      count: 3,
+      imgUrl: "https://source.unsplash.com/random",
+    ),
+    CartItems(
+      title: "Shoes",
+      price: 100,
+      count: 1,
+      imgUrl: "https://source.unsplash.com/random",
+    ),
   ];
   double sum = 0;
 
@@ -60,6 +80,7 @@ class _CartState extends State<Cart> {
                     CartItems item = products[index];
                     return CartFull(
                       index: index,
+                      imgUrl: item.imgUrl,
                       title: item.title,
                       count: item.count,
                       price: item.price,
@@ -180,8 +201,10 @@ class CartItems {
   String title;
   double price;
   int count;
+  String imgUrl;
   CartItems({
     required this.title,
+    required this.imgUrl,
     required this.price,
     required this.count,
   });
