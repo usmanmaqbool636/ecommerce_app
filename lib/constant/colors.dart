@@ -16,8 +16,8 @@ class ColorsConstant {
   static Color gradiendFend = const Color(0xFFE1BEE7);
   static Color endColor = const Color(0xFFE1BEE7);
   static Color purple308 = const Color(0xFFBA68C8);
-  static Color gradiendlEnd = const Color(0xFFAB47BC);
-  static Color gradiendlStart = const Color(0xFFAA00FF);
+  static Color gradiendlEnd = const Color(0xFFE91E63);
+  static Color gradiendlStart = const Color(0xFF9c27b0);
   static Color startercolor = const Color(0xFF8E24AA);
   static Color purple800 = const Color(0xFF6A1B9A);
 }

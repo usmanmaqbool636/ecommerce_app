@@ -46,12 +46,12 @@ class _CartFullState extends State<CartFull> {
       height: height,
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.only(left: 8),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
           topRight: Radius.circular(16),
           bottomRight: Radius.circular(16),
         ),
-        color: Theme.of(context).backgroundColor,
+        color: Colors.blue,
       ),
       child: Row(
         children: [
@@ -61,7 +61,7 @@ class _CartFullState extends State<CartFull> {
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.shade300,
+                    color: Colors.blue.shade300,
                     blurRadius: 5.0, // soften the shadow
                     spreadRadius: 2, //extend the shadow
                     offset: const Offset(

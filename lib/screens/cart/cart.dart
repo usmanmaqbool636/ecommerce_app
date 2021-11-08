@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, deprecated_member_use, avoid_function_literals_in_foreach_calls
 
+import 'package:ecommerce_app/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/constant/my_icons.dart';
@@ -106,20 +107,31 @@ class _CartState extends State<Cart> {
             Expanded(
               flex: 2,
               child: Material(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.red,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(30),
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Checkout",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Theme.of(ctx).textSelectionColor,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600,
+                // color: Colors.red,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    gradient: LinearGradient(
+                      colors: [
+                        ColorsConstant.gradiendlStart,
+                        ColorsConstant.gradiendlEnd
+                      ],
+                      stops: const [0.0, 0.7],
+                    ),
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(30),
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Checkout",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Theme.of(ctx).textSelectionColor,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
