@@ -13,7 +13,7 @@
 // ignore_for_file: avoid_print, prefer_const_constructors
 
 import 'package:ecommerce_app/screens/cart/cart.dart';
-import 'package:ecommerce_app/screens/feeds.dart';
+import 'package:ecommerce_app/screens/feed/feeds.dart';
 import 'package:ecommerce_app/screens/home.dart';
 import 'package:ecommerce_app/screens/search.dart';
 import 'package:ecommerce_app/screens/user_info.dart';
