@@ -212,8 +212,8 @@ class _CartFullState extends State<CartFull> {
                         color: Colors.transparent,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(4),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               "+",
                               style: TextStyle(
