@@ -11,9 +11,11 @@ class CartFull extends StatefulWidget {
   int? index;
   double price;
   int count;
+  Function updateCount;
   CartFull({
     Key? key,
     this.index,
+    required this.updateCount,
     required this.title,
     required this.price,
     required this.count,
@@ -27,12 +29,14 @@ class _CartFullState extends State<CartFull> {
   int counter = 1;
 
   add() {
+    widget.updateCount(widget.index, 1);
     ++counter;
     print("title count ${widget.count}");
   }
 
   subtract() {
     if (widget.count > 1) {
+      widget.updateCount(widget.index, -1);
       ++counter;
       print("title count ${widget.count}");
     }
@@ -42,6 +46,8 @@ class _CartFullState extends State<CartFull> {
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
     double height = 180;
+    print("[Cart] CartFull");
+
     return Container(
       height: height,
       margin: const EdgeInsets.all(8),

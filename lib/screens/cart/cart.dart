@@ -33,8 +33,18 @@ class _CartState extends State<Cart> {
     products.forEach((e) => sum += e.price * e.count);
   }
 
+  updateCount(int index, int count) {
+    print(products[index].count);
+    products[index].count = products[index].count + count;
+    print(products[index].count);
+    sum = 0;
+    products.forEach((e) => sum += e.price * e.count);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("[Cart]");
     return products.isEmpty
         ? Scaffold(
             appBar: emptyAppBar(),
@@ -53,6 +63,7 @@ class _CartState extends State<Cart> {
                       title: item.title,
                       count: item.count,
                       price: item.price,
+                      updateCount: updateCount,
                     );
                   }),
             ),
