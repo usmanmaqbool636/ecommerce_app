@@ -8,7 +8,13 @@ class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FeedProducts(),
+      body: GridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 8,
+        // crossAxisSpacing: 8,
+        childAspectRatio: 240 / 290,
+        children: List.generate(100, (index) => const FeedProducts()),
+      ),
     );
   }
 }
