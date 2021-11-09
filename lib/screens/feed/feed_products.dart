@@ -12,7 +12,7 @@ class _FeedProductsState extends State<FeedProducts> {
   Widget build(BuildContext context) {
     return Container(
       width: 250,
-      height: 290,
+      // height: 290,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           color: Theme.of(context).backgroundColor),
@@ -35,7 +35,63 @@ class _FeedProductsState extends State<FeedProducts> {
           Container(
             padding: const EdgeInsets.only(left: 5),
             margin: const EdgeInsets.only(left: 5, bottom: 2, right: 3),
-            child: Column(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  "Decsription",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  "\$158",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Quantity: 12",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {},
+                          borderRadius: BorderRadius.circular(18.0),
+                          child: const Icon(
+                            Icons.more_horiz,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),
