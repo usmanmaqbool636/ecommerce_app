@@ -14,11 +14,12 @@ class _FeedProductsState extends State<FeedProducts> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: 240,
-        height: 290,
+        height: 400,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             color: Theme.of(context).backgroundColor),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(2),
