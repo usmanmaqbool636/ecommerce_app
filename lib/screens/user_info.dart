@@ -147,42 +147,6 @@ class _UserInfoState extends State<UserInfo> {
                 ),
                 userListTile(
                   context: context,
-                  title: "Email",
-                  subTitle: "Sub Email",
-                  icon: Icons.email,
-                ),
-                userListTile(
-                  context: context,
-                  title: "Email",
-                  subTitle: "Sub Email",
-                  icon: Icons.email,
-                ),
-                userListTile(
-                  context: context,
-                  title: "Email",
-                  subTitle: "Sub Email",
-                  icon: Icons.email,
-                ),
-                userListTile(
-                  context: context,
-                  title: "Email",
-                  subTitle: "Sub Email",
-                  icon: Icons.email,
-                ),
-                userListTile(
-                  context: context,
-                  title: "Email",
-                  subTitle: "Sub Email",
-                  icon: Icons.email,
-                ),
-                userListTile(
-                  context: context,
-                  title: "Email",
-                  subTitle: "Sub Email",
-                  icon: Icons.email,
-                ),
-                userListTile(
-                  context: context,
                   title: "Phone",
                   subTitle: "Sub Phone",
                   icon: Icons.phone,
