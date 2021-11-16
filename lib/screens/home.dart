@@ -14,7 +14,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _current = 0;
-  List itemsList = [
+  List carouselItemsList = [
+    "assets/images/carousel1.png",
+    "assets/images/carousel2.jpeg",
+    "assets/images/carousel3.jpg",
+    "assets/images/carousel4.png",
+  ];
+  List brandsImages = [
     "assets/images/carousel1.png",
     "assets/images/carousel2.jpeg",
     "assets/images/carousel3.jpg",
@@ -23,9 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
-    return
-        // body: BackdropScaffold,
-        BackdropScaffold(
+    return BackdropScaffold(
+      frontLayerBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       frontLayerBorderRadius: const BorderRadius.only(
         topLeft: Radius.circular(0),
         topRight: Radius.circular(0),
@@ -61,99 +66,140 @@ class _HomeScreenState extends State<HomeScreen> {
       backLayer: const Center(
         child: Text("Back Layer"),
       ),
-      frontLayer: Stack(
-        children: [
-          CarouselSlider(
-            carouselController: _controller,
-            items: itemsList.map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(color: Colors.amber),
-                    child: Image.asset(
-                      i,
-                      fit: BoxFit.fill,
+      frontLayer: SingleChildScrollView(
+        child: Column(
+          children: [
+            carouselSliderTop(context),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Popular Brands",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      print("Pressed");
+                    },
+                    child: const Text(
+                      "View all...",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 20,
+                        color: Colors.red,
+                      ),
                     ),
-                  );
-                },
-              );
-            }).toList(),
-            options: CarouselOptions(
-              height: 190,
-              aspectRatio: 16 / 9,
-              viewportFraction: 1,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 1, milliseconds: 500),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeStrategy: CenterPageEnlargeStrategy.scale,
-              onPageChanged: (int index, CarouselPageChangedReason reason) {
-                setState(() {
-                  _current = index;
-                });
-                print(index);
-              },
-              scrollDirection: Axis.horizontal,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: itemsList.asMap().entries.map((entry) {
-                return GestureDetector(
-                  onTap: () {
-                    _controller.animateToPage(entry.key);
-                  },
-                  child: Container(
-                    width: 12.0,
-                    height: 12.0,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black)
-                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+            carouselSliderBrands()
+          ],
+        ),
+      ),
+    );
+  }
+
+  CarouselSlider carouselSliderBrands() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 210,
+        autoPlay: true,
+      ),
+      items: brandsImages.map((item) {
+        return Builder(
+          builder: (BuildContext context) {
+            return GestureDetector(
+              onTap: () {
+                print(item);
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(color: Colors.blueGrey),
+                child: Image.asset(
+                  item,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  Widget carouselSliderTop(BuildContext context) {
+    return Stack(
+      children: [
+        CarouselSlider(
+          carouselController: _controller,
+          items: carouselItemsList.map((i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(color: Colors.amber),
+                  child: Image.asset(
+                    i,
+                    fit: BoxFit.fill,
                   ),
                 );
-              }).toList(),
-            ),
+              },
+            );
+          }).toList(),
+          options: CarouselOptions(
+            height: 190,
+            aspectRatio: 16 / 9,
+            viewportFraction: 1,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 1, milliseconds: 500),
+            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.scale,
+            onPageChanged: (int index, CarouselPageChangedReason reason) {
+              setState(() {
+                _current = index;
+              });
+            },
+            scrollDirection: Axis.horizontal,
           ),
-        ],
-      ),
-      // frontLayer: SizedBox(
-      //   height: 150.0,
-      //   width: 300.0,
-      //   child: Carousel(
-      //     boxFit: BoxFit.cover,
-      //     autoplay: false,
-      //     animationCurve: Curves.fastOutSlowIn,
-      //     animationDuration: Duration(milliseconds: 1000),
-      //     dotSize: 6.0,
-      //     dotIncreasedColor: Color(0xFFFF335C),
-      //     dotBgColor: Colors.transparent,
-      //     dotPosition: DotPosition.topRight,
-      //     dotVerticalPadding: 10.0,
-      //     showIndicator: true,
-      //     indicatorBgPadding: 7.0,
-      //     images: [
-      //       NetworkImage(
-      //           'https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
-      //       NetworkImage(
-      //           'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
-      //       ExactAssetImage("assets/images/LaunchImage.jpg"),
-      //     ],
-      //   ),
-      // ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: carouselItemsList.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () {
+                  _controller.animateToPage(entry.key);
+                },
+                child: Container(
+                  width: 12.0,
+                  height: 12.0,
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black)
+                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
     );
   }
 }
