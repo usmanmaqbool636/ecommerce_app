@@ -3,6 +3,7 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_app/constant/colors.dart';
+import 'package:ecommerce_app/widget/category.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +26,15 @@ class _HomeScreenState extends State<HomeScreen> {
     "assets/images/carousel2.jpeg",
     "assets/images/carousel3.jpg",
     "assets/images/carousel4.png",
+  ];
+  List<Map<String, dynamic>> categories = [
+    {"name": "Phones", "imagPath": "assets/images/CatPhones.png"},
+    {"name": "Clothes", "imagPath": "assets/images/CatClothes.jpg"},
+    {"name": "Shoes", "imagPath": "assets/images/CatShoes.jpg"},
+    {"name": "Buety&Health", "imagPath": "assets/images/CatBeauty.jpg"},
+    {"name": "Laptops", "imagPath": "assets/images/CatLaptops.png"},
+    {"name": "Furniture", "imagPath": "assets/images/CatFurniture.jpg"},
+    {"name": "Watches", "imagPath": "assets/images/CatWatches.jpg"}
   ];
   final CarouselController _controller = CarouselController();
   @override
@@ -96,10 +106,54 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return CategoryWidget(
+                      name: categories[index]["name"],
+                      imgPath: categories[index]["imagPath"],
+                    );
+                  },
+                ),
+              ),
+            ),
             carouselSliderBrands()
           ],
         ),
       ),
+    );
+  }
+
+  CarouselSlider categorySlider() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 210,
+      ),
+      items: brandsImages.map((item) {
+        return Builder(
+          builder: (BuildContext context) {
+            return GestureDetector(
+              onTap: () {
+                print(item);
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: const BoxDecoration(color: Colors.blueGrey),
+                child: Image.asset(
+                  item,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 
@@ -118,8 +172,8 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(color: Colors.blueGrey),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: const BoxDecoration(color: Colors.blueGrey),
                 child: Image.asset(
                   item,
                   fit: BoxFit.fill,
